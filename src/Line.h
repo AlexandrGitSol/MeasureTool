@@ -6,7 +6,7 @@
 struct Line{
     cv::Point p1;
     cv::Point p2;
-    double realLength;
+    double realLength = 0;
 };
 
 #endif // LINE_H

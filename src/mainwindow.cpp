@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->action, &QAction::triggered, this, &MainWindow::onOpenFile);
     connect(ui->action_4, &QAction::triggered, this, &MainWindow::onSaveFile);
+    connect(ui->action_3, &QAction::triggered, this, &MainWindow::onSaveSession);
+    connect(ui->action_2, &QAction::triggered, this, &MainWindow::onLoadSession);
 }
 
 MainWindow::~MainWindow()
@@ -88,6 +90,7 @@ void MainWindow::onOpenFile(){
 }
 
 void MainWindow::onSaveFile(){
+
     QDialog dialog(this);
     dialog.setWindowTitle("Сохранить");
 
@@ -110,6 +113,57 @@ void MainWindow::onSaveFile(){
 
     if (dialog.exec() == QDialog::Accepted){
         session.saveImage(edit1.text(), edit2.text());
+    }
+    this->updateView();
+}
+
+void MainWindow::onSaveSession(){
+    QDialog dialog(this);
+    dialog.setWindowTitle("Сохранить сессию");
+
+    QVBoxLayout layout(&dialog);
+
+    QLabel label1("Введите путь к папке:");
+    QLineEdit edit1;
+    QLabel label2("Введите имя сессии:");
+    QLineEdit edit2;
+    QDialogButtonBox buttons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+
+    layout.addWidget(&label1);
+    layout.addWidget(&edit1);
+    layout.addWidget(&label2);
+    layout.addWidget(&edit2);
+    layout.addWidget(&buttons);
+
+    connect(&buttons, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+    connect(&buttons, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+
+    if (dialog.exec() == QDialog::Accepted){
+        session.saveSession(edit1.text(), edit2.text());
+    }
+    this->updateView();
+
+}
+
+void MainWindow::onLoadSession(){
+    QDialog dialog(this);
+    dialog.setWindowTitle("Загрузить сессию");
+
+    QVBoxLayout layout(&dialog);
+
+    QLabel label("Введите путь к сессии:");
+    QLineEdit edit;
+    QDialogButtonBox buttons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+
+    layout.addWidget(&label);
+    layout.addWidget(&edit);
+    layout.addWidget(&buttons);
+
+    connect(&buttons, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+    connect(&buttons, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+
+    if (dialog.exec() == QDialog::Accepted){
+        session.loadSession(edit.text());
     }
     this->updateView();
 }

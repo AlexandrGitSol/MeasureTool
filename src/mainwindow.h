@@ -38,6 +38,8 @@ public:
 private slots:
     void onOpenFile();
     void onSaveFile();
+    void onLoadSession();
+    void onSaveSession();
     void onPan();
     void onCalibration();
     void onLine();

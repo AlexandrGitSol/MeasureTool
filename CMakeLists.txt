@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
         src/Line.cpp
         src/Session.cpp
         src/GraphicsView.cpp
+        libs/json.hpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -53,7 +54,7 @@ else()
 endif()
 
 target_link_libraries(MeasureTool PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${OpenCV_LIBS})
-target_include_directories(${PROJECT_NAME} PRIVATE src ${OpenCV_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE src ${OpenCV_INCLUDE_DIRS} libs)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

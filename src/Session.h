@@ -5,11 +5,14 @@
 #include <vector>
 #include <opencv2/opencv.hpp>
 #include <QPoint>
+#include <fstream>
+#include "../libs/json.hpp"
 #include "Line.h"
 
 class Session{
     cv::Mat img;
     cv::Mat orig_img;
+    QString path_to_img;
     std::vector<Line> lines;
     Line calibration;
 
