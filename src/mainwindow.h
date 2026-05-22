@@ -34,6 +34,7 @@ public:
     ~MainWindow();
 
     void updateView();
+    void updateListWidget();
 
 private slots:
     void onOpenFile();
@@ -44,7 +45,7 @@ private slots:
     void onCalibration();
     void onLine();
     void onCalibrationDone(double ppm);
-    void onMeasurementCreated(const QString& type, double value, const QVector<QPointF>& points);
+    void onDeleteLine();
 
 private:
     Ui::MainWindow *ui;

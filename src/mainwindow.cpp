@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->action_4, &QAction::triggered, this, &MainWindow::onSaveFile);
     connect(ui->action_3, &QAction::triggered, this, &MainWindow::onSaveSession);
     connect(ui->action_2, &QAction::triggered, this, &MainWindow::onLoadSession);
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::onDeleteLine);
 }
 
 MainWindow::~MainWindow()
@@ -178,7 +179,6 @@ void MainWindow::setupUI()
 void MainWindow::connectSignals()
 {
     connect(graphicsView, &GraphicsView::calibrationDone, this, &MainWindow::onCalibrationDone);
-    connect(graphicsView, &GraphicsView::measurementCreated, this, &MainWindow::onMeasurementCreated);
 }
 
 void MainWindow::onPan() { graphicsView->setMode(GraphicsView::Pan); }
@@ -191,18 +191,23 @@ void MainWindow::onCalibrationDone(double ppm)
     statusBar()->showMessage(QString("Калибровка: %1 пикс/см").arg(ppm));
 }
 
-void MainWindow::onMeasurementCreated(const QString& type, double value, const QVector<QPointF>& points)
-{
-    // Добавляем запись в список справа
-    QListWidget *list = findChild<QListWidget*>("measurementsList");
-    if (!list) {
-        // если нет, создаём
-        list = new QListWidget(this);
-        QDockWidget *dock = new QDockWidget("Измерения", this);
-        dock->setWidget(list);
-        addDockWidget(Qt::RightDockWidgetArea, dock);
-        list->setObjectName("measurementsList");
+void MainWindow::onDeleteLine(){
+    QModelIndex index = ui->listWidget->currentIndex();
+    int row = index.row();
+
+    if (row != -1){
+        session.delLine(row);
     }
-    QString itemText = QString("%1: %2").arg(type).arg(value);
-    list->addItem(itemText);
+
+    updateListWidget();
+    updateView();
+
+}
+
+void MainWindow::updateListWidget(){
+    ui->listWidget->clear();
+    std::vector<QString> all = session.getLines();
+    for (const auto& l : all){
+        ui->listWidget->addItem(l);
+    }
 }

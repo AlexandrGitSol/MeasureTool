@@ -101,6 +101,7 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
             static_cast<MainWindow*>(this->parent()->parent())->session.addCalibration(startPoint, scenePos, realLength);
             static_cast<MainWindow*>(this->parent()->parent())->session.renderImage();
             static_cast<MainWindow*>(this->parent()->parent())->updateView();
+            static_cast<MainWindow*>(this->parent()->parent())->updateListWidget();
             //double pixelLength = QLineF(startPoint, scenePos).length();
             //pixelsPerCm = pixelLength / realLength;
 
@@ -116,6 +117,7 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
         static_cast<MainWindow*>(this->parent()->parent())->session.addLine(startPoint, scenePos, realLength);
         static_cast<MainWindow*>(this->parent()->parent())->session.renderImage();
         static_cast<MainWindow*>(this->parent()->parent())->updateView();
+        static_cast<MainWindow*>(this->parent()->parent())->updateListWidget();
     }
     // Для полигона завершение по двойному клику – см. mouseDoubleClickEvent
 }

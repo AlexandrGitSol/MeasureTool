@@ -26,6 +26,8 @@ public:
     void addLine(QPointF p1q, QPointF p2q, double rl);
     void addCalibration(QPointF p1q, QPointF p2q, double rl);
     void renderImage();
+    void delLine(int ind);
+    std::vector<QString> getLines();
     cv::Mat getMat();
 };
 

@@ -107,6 +107,23 @@ void Session::renderImage(){
     }
 }
 
+void Session::delLine(int ind){
+    lines.erase(lines.begin() + ind);
+    renderImage();
+}
+
+std::vector<QString> Session::getLines(){
+    std::vector<QString> ans;
+    QString addline = "";
+    for (int i = 0; i < lines.size(); ++i){
+        addline = "Line";
+        addline += QString::fromStdString(std::__cxx11::to_string(i)) + ": ";
+        addline += QString::fromStdString(std::__cxx11::to_string(lines[i].realLength)) + " cm";
+        ans.push_back(addline);
+    }
+    return ans;
+}
+
 cv::Mat Session::getMat(){
     return img;
 }
