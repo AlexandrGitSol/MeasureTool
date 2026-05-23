@@ -10,6 +10,7 @@
 #include <QGraphicsPathItem>
 #include <QPen>
 #include <QInputDialog>
+#include <QScrollBar>
 
 
 class MainWindow;
@@ -31,12 +32,14 @@ signals:
     void lineMeasured(double lengthCm);         // когда измерили линию
 
 protected:
+    void wheelEvent(QWheelEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private:
+
     Mode currentMode;
     bool isDrawing;
     QPointF startPoint;

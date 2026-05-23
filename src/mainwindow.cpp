@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->action_3, &QAction::triggered, this, &MainWindow::onSaveSession);
     connect(ui->action_2, &QAction::triggered, this, &MainWindow::onLoadSession);
     connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::onDeleteLine);
+    connect(ui->listWidget, &QListWidget::currentItemChanged, this, &MainWindow::onSelectedLine);
 }
 
 MainWindow::~MainWindow()
@@ -87,6 +88,7 @@ void MainWindow::onOpenFile(){
         session.loadImage(edit.text());
     }
     this->updateView();
+    this->updateListWidget();
 
 }
 
@@ -116,6 +118,7 @@ void MainWindow::onSaveFile(){
         session.saveImage(edit1.text(), edit2.text());
     }
     this->updateView();
+    this->updateListWidget();
 }
 
 void MainWindow::onSaveSession(){
@@ -143,6 +146,7 @@ void MainWindow::onSaveSession(){
         session.saveSession(edit1.text(), edit2.text());
     }
     this->updateView();
+    this->updateListWidget();
 
 }
 
@@ -167,6 +171,7 @@ void MainWindow::onLoadSession(){
         session.loadSession(edit.text());
     }
     this->updateView();
+    this->updateListWidget();
 }
 
 void MainWindow::setupUI()
@@ -202,6 +207,12 @@ void MainWindow::onDeleteLine(){
     updateListWidget();
     updateView();
 
+}
+
+void MainWindow::onSelectedLine(){
+    session.selectedLine(ui->listWidget->currentRow());
+    session.renderImage();
+    this->updateView();
 }
 
 void MainWindow::updateListWidget(){

@@ -6,6 +6,9 @@
 #include <opencv2/opencv.hpp>
 #include <QPoint>
 #include <fstream>
+#include <iomanip>
+#include <cmath>
+#include <sstream>
 #include "../libs/json.hpp"
 #include "Line.h"
 
@@ -15,6 +18,7 @@ class Session{
     QString path_to_img;
     std::vector<Line> lines;
     Line calibration;
+    int selectedline = -1;
 
 public:
     Session();
@@ -27,6 +31,7 @@ public:
     void addCalibration(QPointF p1q, QPointF p2q, double rl);
     void renderImage();
     void delLine(int ind);
+    void selectedLine(int ind);
     std::vector<QString> getLines();
     cv::Mat getMat();
 };

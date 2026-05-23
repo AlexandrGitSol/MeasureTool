@@ -46,6 +46,7 @@ private slots:
     void onLine();
     void onCalibrationDone(double ppm);
     void onDeleteLine();
+    void onSelectedLine();
 
 private:
     Ui::MainWindow *ui;

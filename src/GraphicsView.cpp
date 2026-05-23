@@ -9,6 +9,8 @@ GraphicsView::GraphicsView(QWidget *parent)
     , tempPolygon(nullptr)
     , pixelsPerCm(0.0)
 {
+    setRenderHint(QPainter::SmoothPixmapTransform, true);
+    setRenderHint(QPainter::Antialiasing, true);
     setDragMode(QGraphicsView::ScrollHandDrag);
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     setRenderHint(QPainter::Antialiasing);
@@ -35,7 +37,7 @@ void GraphicsView::setMode(Mode mode)
 void GraphicsView::mousePressEvent(QMouseEvent *event)
 {
     QPointF scenePos = mapToScene(event->pos());
-    if (currentMode == Pan) {
+    if (currentMode == Pan && event->button() == Qt::LeftButton) {
         QGraphicsView::mousePressEvent(event);
         return;
     }
@@ -64,6 +66,8 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
         tempPolygon = scene()->addPath(path, QPen(Qt::blue, 2, Qt::DashLine));
     }
 }
+
+
 
 void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
@@ -102,9 +106,6 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
             static_cast<MainWindow*>(this->parent()->parent())->session.renderImage();
             static_cast<MainWindow*>(this->parent()->parent())->updateView();
             static_cast<MainWindow*>(this->parent()->parent())->updateListWidget();
-            //double pixelLength = QLineF(startPoint, scenePos).length();
-            //pixelsPerCm = pixelLength / realLength;
-
         }
     }
     else if (currentMode == Line && isDrawing) {
@@ -179,4 +180,20 @@ void GraphicsView::undoLastMeasurement()
         delete measurementItems.last();
         measurementItems.pop_back();
     }
+}
+
+void GraphicsView::wheelEvent(QWheelEvent *event)
+{
+    // Точка привязки под курсором
+    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+
+    // Коэффициент масштабирования
+    double scaleFactor = 1.15;
+
+    if (event->angleDelta().y() > 0)
+        scale(scaleFactor, scaleFactor);
+    else
+        scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+
+    event->accept();
 }
