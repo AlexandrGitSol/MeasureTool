@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1062</width>
-    <height>600</height>
+    <width>1078</width>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>20</x>
       <y>60</y>
       <width>731</width>
-      <height>471</height>
+      <height>501</height>
      </rect>
     </property>
    </widget>
@@ -28,9 +28,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>20</y>
       <width>131</width>
-      <height>26</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -41,9 +41,9 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>30</y>
+      <y>20</y>
       <width>131</width>
-      <height>26</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -54,9 +54,9 @@
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>30</y>
+      <y>20</y>
       <width>131</width>
-      <height>26</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -67,9 +67,9 @@
     <property name="geometry">
      <rect>
       <x>760</x>
-      <y>260</y>
-      <width>281</width>
-      <height>271</height>
+      <y>270</y>
+      <width>291</width>
+      <height>291</height>
      </rect>
     </property>
     <property name="title">
@@ -79,9 +79,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>230</y>
+       <y>250</y>
        <width>131</width>
-       <height>26</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
@@ -93,11 +93,37 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>256</width>
-       <height>192</height>
+       <width>271</width>
+       <height>211</height>
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>250</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Удалить все</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>20</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Могоугольник</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -105,7 +131,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1062</width>
+     <width>1078</width>
      <height>23</height>
     </rect>
    </property>
